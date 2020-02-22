@@ -1,0 +1,59 @@
+﻿
+@using ProyClase02.Models.Conection
+
+@*Referencia*@
+
+@model List<tb_Categoria>
+
+@*Captura el bloque de informacion*@
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Mantenimiento</h2>
+
+
+@Html.ActionLink("Nueva Categoria","Agregar")
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                ID
+
+            </th>
+
+            <th>
+                Nombre
+            </th>
+
+            <th>
+                Acciones
+            </th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.idCategoria
+                </td>
+
+                <td>
+                    @item.nombreCategoria
+                </td>
+               
+                <td>
+                    @Html.ActionLink("Editar Datos","Editar",new { id=item.idCategoria});
+                </td>
+            </tr>
+
+
+        }
+
+    </tbody>
+
+    </table>
+

@@ -1,0 +1,69 @@
+﻿@using ProyClase02.Models.BEAN
+    @model List<ContactoClienteBEAN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           fechaContactoCliente
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.comentarioContactoCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estadoContactoCliente)
+        </th>*@
+    <th>
+        idContactabilidad
+    </th>
+    <th>
+        idColaborador
+    </th>
+    <th>
+        idCliente
+    </th>
+
+    <th>
+
+        idProducto
+    </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaContactoCliente)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.comentarioContactoCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estadoContactoCliente)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.tb_Cliente.nombreCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tb_Colaborador.nombreColaborador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tb_Producto.nombreProducto)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idContactabilidad }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idContactabilidad }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idContactabilidad })
+        </td>
+    </tr>
+}
+
+</table>

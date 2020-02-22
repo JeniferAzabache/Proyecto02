@@ -1,0 +1,807 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ContactabilidadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_Categoria">
+          <Key>
+            <PropertyRef Name="idCategoria" />
+          </Key>
+          <Property Name="idCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCategoria" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCliente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidosCliente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechaNacimientoCliente" Type="date" Nullable="false" />
+          <Property Name="numeroDocumentoCliente" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="celularCliente" Type="varchar" MaxLength="20" />
+          <Property Name="direccionCliente" Type="varchar" MaxLength="50" />
+          <Property Name="emailCliente" Type="varchar" MaxLength="50" />
+          <Property Name="generoCliente" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="estadoCliente" Type="bit" Nullable="false" />
+          <Property Name="idTipoDocumento" Type="int" Nullable="false" />
+          <Property Name="idCategoria" Type="int" Nullable="false" />
+          <Property Name="creacionUser" Type="varchar" MaxLength="20" />
+          <Property Name="fechaCreacion" Type="date" />
+          <Property Name="modificacionUser" Type="varchar" MaxLength="20" />
+          <Property Name="fechaModificacion" Type="date" />
+          <Property Name="idubigeo" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Colaborador">
+          <Key>
+            <PropertyRef Name="idColaborador" />
+          </Key>
+          <Property Name="idColaborador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreColaborador" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoColaborador" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="numeroDocumentoColaborador" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="idRol" Type="int" Nullable="false" />
+          <Property Name="idTipoDocumento" Type="int" Nullable="false" />
+          <Property Name="idubigeo" Type="int" />
+          <Property Name="nombUser" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tb_ContactoCliente">
+          <Key>
+            <PropertyRef Name="idContactabilidad" />
+          </Key>
+          <Property Name="idContactabilidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idColaborador" Type="int" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idProducto" Type="int" Nullable="false" />
+          <Property Name="fechaContactoCliente" Type="datetime" Nullable="false" />
+          <Property Name="comentarioContactoCliente" Type="varchar" MaxLength="250" />
+          <Property Name="estadoContactoCliente" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Meta">
+          <Key>
+            <PropertyRef Name="idRol" />
+            <PropertyRef Name="idSemanaPlan" />
+          </Key>
+          <Property Name="idRol" Type="int" Nullable="false" />
+          <Property Name="idSemanaPlan" Type="int" Nullable="false" />
+          <Property Name="totalMeta" Type="int" Nullable="false" />
+          <Property Name="idProducto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Producto">
+          <Key>
+            <PropertyRef Name="idProducto" />
+          </Key>
+          <Property Name="idProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreProducto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcionProducto" Type="varchar" MaxLength="50" />
+          <Property Name="estadoProducto" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Rol">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreRol" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_SemanaPlanificada">
+          <Key>
+            <PropertyRef Name="idSemanaPlan" />
+          </Key>
+          <Property Name="idSemanaPlan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreSemanaPlan" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="fechaInicio" Type="date" Nullable="false" />
+          <Property Name="fechaFin" Type="date" Nullable="false" />
+          <Property Name="estadoSemanaPlan" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_TipoDocumento">
+          <Key>
+            <PropertyRef Name="idTipoDocumento" />
+          </Key>
+          <Property Name="idTipoDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreTipoDocumento" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Ubigeo">
+          <Key>
+            <PropertyRef Name="idubigeo" />
+          </Key>
+          <Property Name="idubigeo" Type="int" Nullable="false" />
+          <Property Name="distrito" Type="varchar" MaxLength="50" />
+          <Property Name="provincia" Type="varchar" MaxLength="50" />
+          <Property Name="departamento" Type="varchar" MaxLength="50" />
+          <Property Name="poblacion" Type="int" />
+          <Property Name="superficie" Type="decimal" Precision="18" Scale="4" />
+        </EntityType>
+        <Association Name="FK_tb_Cliente_tb_Ubigeo">
+          <End Role="tb_Ubigeo" Type="Self.tb_Ubigeo" Multiplicity="0..1" />
+          <End Role="tb_Cliente" Type="Self.tb_Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Ubigeo">
+              <PropertyRef Name="idubigeo" />
+            </Principal>
+            <Dependent Role="tb_Cliente">
+              <PropertyRef Name="idubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Colaborador_tb_Ubigeo">
+          <End Role="tb_Ubigeo" Type="Self.tb_Ubigeo" Multiplicity="0..1" />
+          <End Role="tb_Colaborador" Type="Self.tb_Colaborador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Ubigeo">
+              <PropertyRef Name="idubigeo" />
+            </Principal>
+            <Dependent Role="tb_Colaborador">
+              <PropertyRef Name="idubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Categoria7">
+          <End Role="tb_Categoria" Type="Self.tb_Categoria" Multiplicity="1" />
+          <End Role="tb_Cliente" Type="Self.tb_Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Categoria">
+              <PropertyRef Name="idCategoria" />
+            </Principal>
+            <Dependent Role="tb_Cliente">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Cliente10">
+          <End Role="tb_Cliente" Type="Self.tb_Cliente" Multiplicity="1" />
+          <End Role="tb_ContactoCliente" Type="Self.tb_ContactoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="tb_ContactoCliente">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Colaborador9">
+          <End Role="tb_Colaborador" Type="Self.tb_Colaborador" Multiplicity="1" />
+          <End Role="tb_ContactoCliente" Type="Self.tb_ContactoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Colaborador">
+              <PropertyRef Name="idColaborador" />
+            </Principal>
+            <Dependent Role="tb_ContactoCliente">
+              <PropertyRef Name="idColaborador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Producto14">
+          <End Role="tb_Producto" Type="Self.tb_Producto" Multiplicity="1" />
+          <End Role="tb_ContactoCliente" Type="Self.tb_ContactoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="tb_ContactoCliente">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Producto19">
+          <End Role="tb_Producto" Type="Self.tb_Producto" Multiplicity="1" />
+          <End Role="tb_Meta" Type="Self.tb_Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="tb_Meta">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Rol15">
+          <End Role="tb_Rol" Type="Self.tb_Rol" Multiplicity="1" />
+          <End Role="tb_Colaborador" Type="Self.tb_Colaborador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Rol">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="tb_Colaborador">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Rol16">
+          <End Role="tb_Rol" Type="Self.tb_Rol" Multiplicity="1" />
+          <End Role="tb_Meta" Type="Self.tb_Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Rol">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="tb_Meta">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_SemanaPlanificada17">
+          <End Role="tb_SemanaPlanificada" Type="Self.tb_SemanaPlanificada" Multiplicity="1" />
+          <End Role="tb_Meta" Type="Self.tb_Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_SemanaPlanificada">
+              <PropertyRef Name="idSemanaPlan" />
+            </Principal>
+            <Dependent Role="tb_Meta">
+              <PropertyRef Name="idSemanaPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_TipoDocumento3">
+          <End Role="tb_TipoDocumento" Type="Self.tb_TipoDocumento" Multiplicity="1" />
+          <End Role="tb_Cliente" Type="Self.tb_Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_TipoDocumento">
+              <PropertyRef Name="idTipoDocumento" />
+            </Principal>
+            <Dependent Role="tb_Cliente">
+              <PropertyRef Name="idTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_TipoDocumento4">
+          <End Role="tb_TipoDocumento" Type="Self.tb_TipoDocumento" Multiplicity="1" />
+          <End Role="tb_Colaborador" Type="Self.tb_Colaborador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_TipoDocumento">
+              <PropertyRef Name="idTipoDocumento" />
+            </Principal>
+            <Dependent Role="tb_Colaborador">
+              <PropertyRef Name="idTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ContactabilidadModelStoreContainer">
+          <EntitySet Name="tb_Categoria" EntityType="Self.tb_Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Cliente" EntityType="Self.tb_Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Colaborador" EntityType="Self.tb_Colaborador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_ContactoCliente" EntityType="Self.tb_ContactoCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Meta" EntityType="Self.tb_Meta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Producto" EntityType="Self.tb_Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Rol" EntityType="Self.tb_Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_SemanaPlanificada" EntityType="Self.tb_SemanaPlanificada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_TipoDocumento" EntityType="Self.tb_TipoDocumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Ubigeo" EntityType="Self.tb_Ubigeo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tb_Cliente_tb_Ubigeo" Association="Self.FK_tb_Cliente_tb_Ubigeo">
+            <End Role="tb_Ubigeo" EntitySet="tb_Ubigeo" />
+            <End Role="tb_Cliente" EntitySet="tb_Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Colaborador_tb_Ubigeo" Association="Self.FK_tb_Colaborador_tb_Ubigeo">
+            <End Role="tb_Ubigeo" EntitySet="tb_Ubigeo" />
+            <End Role="tb_Colaborador" EntitySet="tb_Colaborador" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Categoria7" Association="Self.Reftb_Categoria7">
+            <End Role="tb_Categoria" EntitySet="tb_Categoria" />
+            <End Role="tb_Cliente" EntitySet="tb_Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Cliente10" Association="Self.Reftb_Cliente10">
+            <End Role="tb_Cliente" EntitySet="tb_Cliente" />
+            <End Role="tb_ContactoCliente" EntitySet="tb_ContactoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Colaborador9" Association="Self.Reftb_Colaborador9">
+            <End Role="tb_Colaborador" EntitySet="tb_Colaborador" />
+            <End Role="tb_ContactoCliente" EntitySet="tb_ContactoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Producto14" Association="Self.Reftb_Producto14">
+            <End Role="tb_Producto" EntitySet="tb_Producto" />
+            <End Role="tb_ContactoCliente" EntitySet="tb_ContactoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Producto19" Association="Self.Reftb_Producto19">
+            <End Role="tb_Producto" EntitySet="tb_Producto" />
+            <End Role="tb_Meta" EntitySet="tb_Meta" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Rol15" Association="Self.Reftb_Rol15">
+            <End Role="tb_Rol" EntitySet="tb_Rol" />
+            <End Role="tb_Colaborador" EntitySet="tb_Colaborador" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Rol16" Association="Self.Reftb_Rol16">
+            <End Role="tb_Rol" EntitySet="tb_Rol" />
+            <End Role="tb_Meta" EntitySet="tb_Meta" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_SemanaPlanificada17" Association="Self.Reftb_SemanaPlanificada17">
+            <End Role="tb_SemanaPlanificada" EntitySet="tb_SemanaPlanificada" />
+            <End Role="tb_Meta" EntitySet="tb_Meta" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_TipoDocumento3" Association="Self.Reftb_TipoDocumento3">
+            <End Role="tb_TipoDocumento" EntitySet="tb_TipoDocumento" />
+            <End Role="tb_Cliente" EntitySet="tb_Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_TipoDocumento4" Association="Self.Reftb_TipoDocumento4">
+            <End Role="tb_TipoDocumento" EntitySet="tb_TipoDocumento" />
+            <End Role="tb_Colaborador" EntitySet="tb_Colaborador" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ContactabilidadModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_Categoria">
+          <Key>
+            <PropertyRef Name="idCategoria" />
+          </Key>
+          <Property Name="idCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCategoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_Cliente" Relationship="Self.Reftb_Categoria7" FromRole="tb_Categoria" ToRole="tb_Cliente" />
+        </EntityType>
+        <EntityType Name="tb_Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidosCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaNacimientoCliente" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="numeroDocumentoCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="celularCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="direccionCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="emailCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="generoCliente" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="estadoCliente" Type="Boolean" Nullable="false" />
+          <Property Name="idTipoDocumento" Type="Int32" Nullable="false" />
+          <Property Name="idCategoria" Type="Int32" Nullable="false" />
+          <Property Name="creacionUser" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fechaCreacion" Type="DateTime" Precision="0" />
+          <Property Name="modificacionUser" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fechaModificacion" Type="DateTime" Precision="0" />
+          <Property Name="idubigeo" Type="Int32" />
+          <NavigationProperty Name="tb_Categoria" Relationship="Self.Reftb_Categoria7" FromRole="tb_Cliente" ToRole="tb_Categoria" />
+          <NavigationProperty Name="tb_Ubigeo" Relationship="Self.FK_tb_Cliente_tb_Ubigeo" FromRole="tb_Cliente" ToRole="tb_Ubigeo" />
+          <NavigationProperty Name="tb_ContactoCliente" Relationship="Self.Reftb_Cliente10" FromRole="tb_Cliente" ToRole="tb_ContactoCliente" />
+          <NavigationProperty Name="tb_TipoDocumento" Relationship="Self.Reftb_TipoDocumento3" FromRole="tb_Cliente" ToRole="tb_TipoDocumento" />
+        </EntityType>
+        <EntityType Name="tb_Colaborador">
+          <Key>
+            <PropertyRef Name="idColaborador" />
+          </Key>
+          <Property Name="idColaborador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreColaborador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidoColaborador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numeroDocumentoColaborador" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idRol" Type="Int32" Nullable="false" />
+          <Property Name="idTipoDocumento" Type="Int32" Nullable="false" />
+          <Property Name="idubigeo" Type="Int32" />
+          <Property Name="nombUser" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_Ubigeo" Relationship="Self.FK_tb_Colaborador_tb_Ubigeo" FromRole="tb_Colaborador" ToRole="tb_Ubigeo" />
+          <NavigationProperty Name="tb_ContactoCliente" Relationship="Self.Reftb_Colaborador9" FromRole="tb_Colaborador" ToRole="tb_ContactoCliente" />
+          <NavigationProperty Name="tb_Rol" Relationship="Self.Reftb_Rol15" FromRole="tb_Colaborador" ToRole="tb_Rol" />
+          <NavigationProperty Name="tb_TipoDocumento" Relationship="Self.Reftb_TipoDocumento4" FromRole="tb_Colaborador" ToRole="tb_TipoDocumento" />
+        </EntityType>
+        <EntityType Name="tb_ContactoCliente">
+          <Key>
+            <PropertyRef Name="idContactabilidad" />
+          </Key>
+          <Property Name="idContactabilidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idColaborador" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idProducto" Type="Int32" Nullable="false" />
+          <Property Name="fechaContactoCliente" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="comentarioContactoCliente" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="estadoContactoCliente" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_Cliente" Relationship="Self.Reftb_Cliente10" FromRole="tb_ContactoCliente" ToRole="tb_Cliente" />
+          <NavigationProperty Name="tb_Colaborador" Relationship="Self.Reftb_Colaborador9" FromRole="tb_ContactoCliente" ToRole="tb_Colaborador" />
+          <NavigationProperty Name="tb_Producto" Relationship="Self.Reftb_Producto14" FromRole="tb_ContactoCliente" ToRole="tb_Producto" />
+        </EntityType>
+        <EntityType Name="tb_Meta">
+          <Key>
+            <PropertyRef Name="idRol" />
+            <PropertyRef Name="idSemanaPlan" />
+          </Key>
+          <Property Name="idRol" Type="Int32" Nullable="false" />
+          <Property Name="idSemanaPlan" Type="Int32" Nullable="false" />
+          <Property Name="totalMeta" Type="Int32" Nullable="false" />
+          <Property Name="idProducto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Producto" Relationship="Self.Reftb_Producto19" FromRole="tb_Meta" ToRole="tb_Producto" />
+          <NavigationProperty Name="tb_Rol" Relationship="Self.Reftb_Rol16" FromRole="tb_Meta" ToRole="tb_Rol" />
+          <NavigationProperty Name="tb_SemanaPlanificada" Relationship="Self.Reftb_SemanaPlanificada17" FromRole="tb_Meta" ToRole="tb_SemanaPlanificada" />
+        </EntityType>
+        <EntityType Name="tb_Producto">
+          <Key>
+            <PropertyRef Name="idProducto" />
+          </Key>
+          <Property Name="idProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreProducto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcionProducto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estadoProducto" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tb_ContactoCliente" Relationship="Self.Reftb_Producto14" FromRole="tb_Producto" ToRole="tb_ContactoCliente" />
+          <NavigationProperty Name="tb_Meta" Relationship="Self.Reftb_Producto19" FromRole="tb_Producto" ToRole="tb_Meta" />
+        </EntityType>
+        <EntityType Name="tb_Rol">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreRol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_Colaborador" Relationship="Self.Reftb_Rol15" FromRole="tb_Rol" ToRole="tb_Colaborador" />
+          <NavigationProperty Name="tb_Meta" Relationship="Self.Reftb_Rol16" FromRole="tb_Rol" ToRole="tb_Meta" />
+        </EntityType>
+        <EntityType Name="tb_SemanaPlanificada">
+          <Key>
+            <PropertyRef Name="idSemanaPlan" />
+          </Key>
+          <Property Name="idSemanaPlan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreSemanaPlan" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="estadoSemanaPlan" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tb_Meta" Relationship="Self.Reftb_SemanaPlanificada17" FromRole="tb_SemanaPlanificada" ToRole="tb_Meta" />
+        </EntityType>
+        <EntityType Name="tb_TipoDocumento">
+          <Key>
+            <PropertyRef Name="idTipoDocumento" />
+          </Key>
+          <Property Name="idTipoDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreTipoDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_Cliente" Relationship="Self.Reftb_TipoDocumento3" FromRole="tb_TipoDocumento" ToRole="tb_Cliente" />
+          <NavigationProperty Name="tb_Colaborador" Relationship="Self.Reftb_TipoDocumento4" FromRole="tb_TipoDocumento" ToRole="tb_Colaborador" />
+        </EntityType>
+        <EntityType Name="tb_Ubigeo">
+          <Key>
+            <PropertyRef Name="idubigeo" />
+          </Key>
+          <Property Name="idubigeo" Type="Int32" Nullable="false" />
+          <Property Name="distrito" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="poblacion" Type="Int32" />
+          <Property Name="superficie" Type="Decimal" Precision="18" Scale="4" />
+          <NavigationProperty Name="tb_Cliente" Relationship="Self.FK_tb_Cliente_tb_Ubigeo" FromRole="tb_Ubigeo" ToRole="tb_Cliente" />
+          <NavigationProperty Name="tb_Colaborador" Relationship="Self.FK_tb_Colaborador_tb_Ubigeo" FromRole="tb_Ubigeo" ToRole="tb_Colaborador" />
+        </EntityType>
+        <Association Name="Reftb_Categoria7">
+          <End Role="tb_Categoria" Type="Self.tb_Categoria" Multiplicity="1" />
+          <End Role="tb_Cliente" Type="Self.tb_Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Categoria">
+              <PropertyRef Name="idCategoria" />
+            </Principal>
+            <Dependent Role="tb_Cliente">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Cliente_tb_Ubigeo">
+          <End Role="tb_Ubigeo" Type="Self.tb_Ubigeo" Multiplicity="0..1" />
+          <End Role="tb_Cliente" Type="Self.tb_Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Ubigeo">
+              <PropertyRef Name="idubigeo" />
+            </Principal>
+            <Dependent Role="tb_Cliente">
+              <PropertyRef Name="idubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Cliente10">
+          <End Role="tb_Cliente" Type="Self.tb_Cliente" Multiplicity="1" />
+          <End Role="tb_ContactoCliente" Type="Self.tb_ContactoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="tb_ContactoCliente">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_TipoDocumento3">
+          <End Role="tb_TipoDocumento" Type="Self.tb_TipoDocumento" Multiplicity="1" />
+          <End Role="tb_Cliente" Type="Self.tb_Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_TipoDocumento">
+              <PropertyRef Name="idTipoDocumento" />
+            </Principal>
+            <Dependent Role="tb_Cliente">
+              <PropertyRef Name="idTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Colaborador_tb_Ubigeo">
+          <End Role="tb_Ubigeo" Type="Self.tb_Ubigeo" Multiplicity="0..1" />
+          <End Role="tb_Colaborador" Type="Self.tb_Colaborador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Ubigeo">
+              <PropertyRef Name="idubigeo" />
+            </Principal>
+            <Dependent Role="tb_Colaborador">
+              <PropertyRef Name="idubigeo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Colaborador9">
+          <End Role="tb_Colaborador" Type="Self.tb_Colaborador" Multiplicity="1" />
+          <End Role="tb_ContactoCliente" Type="Self.tb_ContactoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Colaborador">
+              <PropertyRef Name="idColaborador" />
+            </Principal>
+            <Dependent Role="tb_ContactoCliente">
+              <PropertyRef Name="idColaborador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Rol15">
+          <End Role="tb_Rol" Type="Self.tb_Rol" Multiplicity="1" />
+          <End Role="tb_Colaborador" Type="Self.tb_Colaborador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Rol">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="tb_Colaborador">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_TipoDocumento4">
+          <End Role="tb_TipoDocumento" Type="Self.tb_TipoDocumento" Multiplicity="1" />
+          <End Role="tb_Colaborador" Type="Self.tb_Colaborador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_TipoDocumento">
+              <PropertyRef Name="idTipoDocumento" />
+            </Principal>
+            <Dependent Role="tb_Colaborador">
+              <PropertyRef Name="idTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Producto14">
+          <End Role="tb_Producto" Type="Self.tb_Producto" Multiplicity="1" />
+          <End Role="tb_ContactoCliente" Type="Self.tb_ContactoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="tb_ContactoCliente">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Producto19">
+          <End Role="tb_Producto" Type="Self.tb_Producto" Multiplicity="1" />
+          <End Role="tb_Meta" Type="Self.tb_Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="tb_Meta">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_Rol16">
+          <End Role="tb_Rol" Type="Self.tb_Rol" Multiplicity="1" />
+          <End Role="tb_Meta" Type="Self.tb_Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Rol">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="tb_Meta">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reftb_SemanaPlanificada17">
+          <End Role="tb_SemanaPlanificada" Type="Self.tb_SemanaPlanificada" Multiplicity="1" />
+          <End Role="tb_Meta" Type="Self.tb_Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_SemanaPlanificada">
+              <PropertyRef Name="idSemanaPlan" />
+            </Principal>
+            <Dependent Role="tb_Meta">
+              <PropertyRef Name="idSemanaPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ConectionBD" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_Categoria" EntityType="Self.tb_Categoria" />
+          <EntitySet Name="tb_Cliente" EntityType="Self.tb_Cliente" />
+          <EntitySet Name="tb_Colaborador" EntityType="Self.tb_Colaborador" />
+          <EntitySet Name="tb_ContactoCliente" EntityType="Self.tb_ContactoCliente" />
+          <EntitySet Name="tb_Meta" EntityType="Self.tb_Meta" />
+          <EntitySet Name="tb_Producto" EntityType="Self.tb_Producto" />
+          <EntitySet Name="tb_Rol" EntityType="Self.tb_Rol" />
+          <EntitySet Name="tb_SemanaPlanificada" EntityType="Self.tb_SemanaPlanificada" />
+          <EntitySet Name="tb_TipoDocumento" EntityType="Self.tb_TipoDocumento" />
+          <EntitySet Name="tb_Ubigeo" EntityType="Self.tb_Ubigeo" />
+          <AssociationSet Name="Reftb_Categoria7" Association="Self.Reftb_Categoria7">
+            <End Role="tb_Categoria" EntitySet="tb_Categoria" />
+            <End Role="tb_Cliente" EntitySet="tb_Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Cliente_tb_Ubigeo" Association="Self.FK_tb_Cliente_tb_Ubigeo">
+            <End Role="tb_Ubigeo" EntitySet="tb_Ubigeo" />
+            <End Role="tb_Cliente" EntitySet="tb_Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Cliente10" Association="Self.Reftb_Cliente10">
+            <End Role="tb_Cliente" EntitySet="tb_Cliente" />
+            <End Role="tb_ContactoCliente" EntitySet="tb_ContactoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_TipoDocumento3" Association="Self.Reftb_TipoDocumento3">
+            <End Role="tb_TipoDocumento" EntitySet="tb_TipoDocumento" />
+            <End Role="tb_Cliente" EntitySet="tb_Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Colaborador_tb_Ubigeo" Association="Self.FK_tb_Colaborador_tb_Ubigeo">
+            <End Role="tb_Ubigeo" EntitySet="tb_Ubigeo" />
+            <End Role="tb_Colaborador" EntitySet="tb_Colaborador" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Colaborador9" Association="Self.Reftb_Colaborador9">
+            <End Role="tb_Colaborador" EntitySet="tb_Colaborador" />
+            <End Role="tb_ContactoCliente" EntitySet="tb_ContactoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Rol15" Association="Self.Reftb_Rol15">
+            <End Role="tb_Rol" EntitySet="tb_Rol" />
+            <End Role="tb_Colaborador" EntitySet="tb_Colaborador" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_TipoDocumento4" Association="Self.Reftb_TipoDocumento4">
+            <End Role="tb_TipoDocumento" EntitySet="tb_TipoDocumento" />
+            <End Role="tb_Colaborador" EntitySet="tb_Colaborador" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Producto14" Association="Self.Reftb_Producto14">
+            <End Role="tb_Producto" EntitySet="tb_Producto" />
+            <End Role="tb_ContactoCliente" EntitySet="tb_ContactoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Producto19" Association="Self.Reftb_Producto19">
+            <End Role="tb_Producto" EntitySet="tb_Producto" />
+            <End Role="tb_Meta" EntitySet="tb_Meta" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_Rol16" Association="Self.Reftb_Rol16">
+            <End Role="tb_Rol" EntitySet="tb_Rol" />
+            <End Role="tb_Meta" EntitySet="tb_Meta" />
+          </AssociationSet>
+          <AssociationSet Name="Reftb_SemanaPlanificada17" Association="Self.Reftb_SemanaPlanificada17">
+            <End Role="tb_SemanaPlanificada" EntitySet="tb_SemanaPlanificada" />
+            <End Role="tb_Meta" EntitySet="tb_Meta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ContactabilidadModelStoreContainer" CdmEntityContainer="ConectionBD">
+          <EntitySetMapping Name="tb_Categoria">
+            <EntityTypeMapping TypeName="ContactabilidadModel.tb_Categoria">
+              <MappingFragment StoreEntitySet="tb_Categoria">
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="nombreCategoria" ColumnName="nombreCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Cliente">
+            <EntityTypeMapping TypeName="ContactabilidadModel.tb_Cliente">
+              <MappingFragment StoreEntitySet="tb_Cliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+                <ScalarProperty Name="apellidosCliente" ColumnName="apellidosCliente" />
+                <ScalarProperty Name="fechaNacimientoCliente" ColumnName="fechaNacimientoCliente" />
+                <ScalarProperty Name="numeroDocumentoCliente" ColumnName="numeroDocumentoCliente" />
+                <ScalarProperty Name="celularCliente" ColumnName="celularCliente" />
+                <ScalarProperty Name="direccionCliente" ColumnName="direccionCliente" />
+                <ScalarProperty Name="emailCliente" ColumnName="emailCliente" />
+                <ScalarProperty Name="generoCliente" ColumnName="generoCliente" />
+                <ScalarProperty Name="estadoCliente" ColumnName="estadoCliente" />
+                <ScalarProperty Name="idTipoDocumento" ColumnName="idTipoDocumento" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="creacionUser" ColumnName="creacionUser" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="modificacionUser" ColumnName="modificacionUser" />
+                <ScalarProperty Name="fechaModificacion" ColumnName="fechaModificacion" />
+                <ScalarProperty Name="idubigeo" ColumnName="idubigeo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Colaborador">
+            <EntityTypeMapping TypeName="ContactabilidadModel.tb_Colaborador">
+              <MappingFragment StoreEntitySet="tb_Colaborador">
+                <ScalarProperty Name="idColaborador" ColumnName="idColaborador" />
+                <ScalarProperty Name="nombreColaborador" ColumnName="nombreColaborador" />
+                <ScalarProperty Name="apellidoColaborador" ColumnName="apellidoColaborador" />
+                <ScalarProperty Name="numeroDocumentoColaborador" ColumnName="numeroDocumentoColaborador" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="idTipoDocumento" ColumnName="idTipoDocumento" />
+                <ScalarProperty Name="idubigeo" ColumnName="idubigeo" />
+                <ScalarProperty Name="nombUser" ColumnName="nombUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ContactoCliente">
+            <EntityTypeMapping TypeName="ContactabilidadModel.tb_ContactoCliente">
+              <MappingFragment StoreEntitySet="tb_ContactoCliente">
+                <ScalarProperty Name="idContactabilidad" ColumnName="idContactabilidad" />
+                <ScalarProperty Name="idColaborador" ColumnName="idColaborador" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="fechaContactoCliente" ColumnName="fechaContactoCliente" />
+                <ScalarProperty Name="comentarioContactoCliente" ColumnName="comentarioContactoCliente" />
+                <ScalarProperty Name="estadoContactoCliente" ColumnName="estadoContactoCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Meta">
+            <EntityTypeMapping TypeName="ContactabilidadModel.tb_Meta">
+              <MappingFragment StoreEntitySet="tb_Meta">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="idSemanaPlan" ColumnName="idSemanaPlan" />
+                <ScalarProperty Name="totalMeta" ColumnName="totalMeta" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Producto">
+            <EntityTypeMapping TypeName="ContactabilidadModel.tb_Producto">
+              <MappingFragment StoreEntitySet="tb_Producto">
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="nombreProducto" ColumnName="nombreProducto" />
+                <ScalarProperty Name="descripcionProducto" ColumnName="descripcionProducto" />
+                <ScalarProperty Name="estadoProducto" ColumnName="estadoProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Rol">
+            <EntityTypeMapping TypeName="ContactabilidadModel.tb_Rol">
+              <MappingFragment StoreEntitySet="tb_Rol">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_SemanaPlanificada">
+            <EntityTypeMapping TypeName="ContactabilidadModel.tb_SemanaPlanificada">
+              <MappingFragment StoreEntitySet="tb_SemanaPlanificada">
+                <ScalarProperty Name="idSemanaPlan" ColumnName="idSemanaPlan" />
+                <ScalarProperty Name="nombreSemanaPlan" ColumnName="nombreSemanaPlan" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+                <ScalarProperty Name="estadoSemanaPlan" ColumnName="estadoSemanaPlan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_TipoDocumento">
+            <EntityTypeMapping TypeName="ContactabilidadModel.tb_TipoDocumento">
+              <MappingFragment StoreEntitySet="tb_TipoDocumento">
+                <ScalarProperty Name="idTipoDocumento" ColumnName="idTipoDocumento" />
+                <ScalarProperty Name="nombreTipoDocumento" ColumnName="nombreTipoDocumento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Ubigeo">
+            <EntityTypeMapping TypeName="ContactabilidadModel.tb_Ubigeo">
+              <MappingFragment StoreEntitySet="tb_Ubigeo">
+                <ScalarProperty Name="idubigeo" ColumnName="idubigeo" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="poblacion" ColumnName="poblacion" />
+                <ScalarProperty Name="superficie" ColumnName="superficie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
